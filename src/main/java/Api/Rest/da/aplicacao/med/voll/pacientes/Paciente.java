@@ -1,6 +1,7 @@
 package Api.Rest.da.aplicacao.med.voll.pacientes;
 import Api.Rest.da.aplicacao.med.voll.endereco.Endereco;
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import lombok.*;
 
 
@@ -24,9 +25,10 @@ public class Paciente {
     @Embedded
     private Endereco endereco;
 
-
+     private boolean ativo;
 
     public Paciente(dadosCadastroPaciente dados) {
+        this.ativo=true;
         this.nome = dados.nome();
         this.email = dados.email();
         this.cpf = dados.cpf();
@@ -35,4 +37,22 @@ public class Paciente {
 
     }
 
+
+
+    public void atualizarPaciente(@Valid dadosAtualizarPacientes dados) {
+        if(dados.nome()!=null){
+            this.nome = dados.nome();
+        }
+        if (dados.telefone()!=null){
+            this.telefone = dados.telefone();
+        }
+        if (dados.email()!=null){
+            this.email = dados.email();
+        }
+
+    }
+    public void excluir(){
+
+        this.ativo=false;
+    }
 }
