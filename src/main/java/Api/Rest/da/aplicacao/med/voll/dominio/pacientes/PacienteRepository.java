@@ -1,6 +1,5 @@
-package Api.Rest.da.aplicacao.med.voll.pacientes;
+package Api.Rest.da.aplicacao.med.voll.dominio.pacientes;
 
-import io.micrometer.observation.ObservationFilter;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

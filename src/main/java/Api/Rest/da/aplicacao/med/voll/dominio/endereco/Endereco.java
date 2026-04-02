@@ -1,8 +1,7 @@
-package Api.Rest.da.aplicacao.med.voll.endereco;
+package Api.Rest.da.aplicacao.med.voll.dominio.endereco;
 
 
 import jakarta.persistence.Embeddable;
-import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

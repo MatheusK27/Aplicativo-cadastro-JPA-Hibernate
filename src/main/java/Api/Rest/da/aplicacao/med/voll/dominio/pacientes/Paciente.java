@@ -1,5 +1,5 @@
-package Api.Rest.da.aplicacao.med.voll.pacientes;
-import Api.Rest.da.aplicacao.med.voll.endereco.Endereco;
+package Api.Rest.da.aplicacao.med.voll.dominio.pacientes;
+import Api.Rest.da.aplicacao.med.voll.dominio.endereco.Endereco;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import lombok.*;

@@ -1,4 +1,4 @@
-package Api.Rest.da.aplicacao.med.voll.pacientes;
+package Api.Rest.da.aplicacao.med.voll.dominio.pacientes;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

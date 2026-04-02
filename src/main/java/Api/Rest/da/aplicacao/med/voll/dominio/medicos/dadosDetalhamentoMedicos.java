@@ -1,4 +1,4 @@
-package Api.Rest.da.aplicacao.med.voll.medicos;
+package Api.Rest.da.aplicacao.med.voll.dominio.medicos;
 
 public record dadosDetalhamentoMedicos(Long id, String nome,String email,String crm, String telefone,Especialidades especialidade) {
   public dadosDetalhamentoMedicos(Medico medico){

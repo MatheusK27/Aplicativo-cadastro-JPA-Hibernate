@@ -1,5 +1,5 @@
-package Api.Rest.da.aplicacao.med.voll.pacientes;
-import Api.Rest.da.aplicacao.med.voll.endereco.dadosEnderecos;
+package Api.Rest.da.aplicacao.med.voll.dominio.pacientes;
+import Api.Rest.da.aplicacao.med.voll.dominio.endereco.dadosEnderecos;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 
