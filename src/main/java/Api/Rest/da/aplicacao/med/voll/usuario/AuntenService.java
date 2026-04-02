@@ -1,0 +1,20 @@
+package Api.Rest.da.aplicacao.med.voll.usuario;
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
+
+@Service
+public class AuntenService implements UserDetailsService {
+
+    @Autowired
+    private UsuarioRepository Repository;
+
+    @Override
+    public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
+        return Repository.findByLogin(login);
+    }
+}
