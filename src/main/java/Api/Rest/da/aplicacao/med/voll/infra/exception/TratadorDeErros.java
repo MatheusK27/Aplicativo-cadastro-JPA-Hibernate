@@ -1,7 +1,6 @@
-package Api.Rest.da.aplicacao.med.voll.infra;
+package Api.Rest.da.aplicacao.med.voll.infra.exception;
 
 
-import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
