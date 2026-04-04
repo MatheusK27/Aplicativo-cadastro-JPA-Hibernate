@@ -1,4 +1,4 @@
-package Api.Rest.da.aplicacao.med.voll.infra.sicurity;
+package Api.Rest.da.aplicacao.med.voll.infra.security;
 
 
 
@@ -26,11 +26,10 @@ public class SicurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.POST, "/login").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/usuario").permitAll()
-                        .anyRequest().authenticated()
-                )
+                .authorizeHttpRequests(req -> {
+                    req.requestMatchers("/login").permitAll();
+                    req.anyRequest().authenticated();
+                })
                 .build();
     }
 
