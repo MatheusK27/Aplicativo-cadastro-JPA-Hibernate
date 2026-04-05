@@ -1,6 +1,7 @@
 package Api.Rest.da.aplicacao.med.voll.usuario;
 
 
+import Api.Rest.da.aplicacao.med.voll.infra.security.Roles;
 import jakarta.persistence.*;
 import lombok.*;
 import org.jspecify.annotations.Nullable;
@@ -26,16 +27,21 @@ public class Usuario  implements UserDetails {
     private String login;
     private String senha;
 
+    @Enumerated(EnumType.STRING)
+    private Roles role;
+
     public Usuario(DadosCadastroUsuario dados) {
         this.login= dados.login();
         this.senha = dados.senha();
+        this.role= Roles.USER;
+
     }
 
 
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of( new SimpleGrantedAuthority("ROLE_USUARIO") );
+        return List.of(new SimpleGrantedAuthority("ROLE_" + this.role.name()));
     }
 
     @Override
