@@ -4,6 +4,7 @@ package Api.Rest.da.aplicacao.med.voll.dominio.dadosConsulta;
 import Api.Rest.da.aplicacao.med.voll.dominio.medicos.Medico;
 import Api.Rest.da.aplicacao.med.voll.dominio.pacientes.Paciente;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -28,4 +29,15 @@ public class Consulta {
     private Paciente paciente;
 
     private LocalDateTime data;
+
+      @Column(name = "motivo_cancelamento")
+      @Enumerated(EnumType.STRING)
+      private MotivoCancelamento motivoCancelamento;
+
+      public void cancelar(MotivoCancelamento motivo  ){
+      this.motivoCancelamento=motivo;
+}
+
+
+
 }

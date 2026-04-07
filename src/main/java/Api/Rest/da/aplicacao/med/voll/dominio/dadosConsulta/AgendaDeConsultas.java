@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class AgendaDeConsultas {
 
+
+
     @Autowired
     private ConsultaRepository repository;
 
@@ -32,7 +34,7 @@ public class AgendaDeConsultas {
 
         var medico= escolherMedico(dados);
         var paciente= pacienteRepository.getReferenceById(dados.idPaciente());
-        var consulta =  new Consulta(null, medico, paciente, dados.data());
+        var consulta =  new Consulta(null, medico, paciente, dados.data(),null);
         repository.save(consulta);
 
     }
@@ -47,6 +49,14 @@ public class AgendaDeConsultas {
         }
 
         return medicoRepository.escolherMedicoAleatoriLivreNaData(dados.especialidades(), dados.especialidades());
+    }
+
+    public void cancelar(DadosCancelamentoConsultas dados){
+        if(!repository.existsById(dados.idConsulta())){
+            throw new ValidacaoException("ID da consulta não existe ");
+        }
+        var consulta= repository.getReferenceById(dados.idConsulta());
+        consulta.cancelar(dados.motivo());
     }
 
 }
