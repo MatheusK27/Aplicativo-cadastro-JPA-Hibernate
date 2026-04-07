@@ -5,17 +5,16 @@ import Api.Rest.da.aplicacao.med.voll.infra.security.Roles;
 import Api.Rest.da.aplicacao.med.voll.usuario.DadosCadastroUsuario;
 import Api.Rest.da.aplicacao.med.voll.usuario.Usuario;
 import Api.Rest.da.aplicacao.med.voll.usuario.UsuarioRepository;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UserDetails;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
-@RequestMapping("/usuario")
+@RequestMapping("/usuarios")
 public class UsuarioController {
 
     @Autowired
@@ -31,7 +30,7 @@ public class UsuarioController {
        var usuario = new Usuario(dados);
         usuario.setSenha(passwordEncoder.encode(dados.senha()));
        repository.save(usuario);
-        var uri= uriBuilder.path("usuario/{id}").buildAndExpand(usuario.getId()).toUri();
+        var uri= uriBuilder.path("usuarios/{id}").buildAndExpand(usuario.getId()).toUri();
         return ResponseEntity.created(uri).body(usuario);
     }
 
@@ -46,8 +45,7 @@ public class UsuarioController {
     @PutMapping("/admin/promover")
     public ResponseEntity promover(@RequestBody String login) {
 
-
-        Usuario usuario =repository.findByLogin(login);
+        Usuario usuario = repository.findByLogin(login);
 
         usuario.setRole(Roles.ADMIN);
 

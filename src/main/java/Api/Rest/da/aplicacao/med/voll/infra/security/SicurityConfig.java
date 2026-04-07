@@ -33,9 +33,9 @@ public class SicurityConfig {
                         .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                         .authorizeHttpRequests(req -> {
                             req.requestMatchers("/login").permitAll()
-                                    .requestMatchers(HttpMethod.POST, "/usuario").permitAll()
-                                    .requestMatchers(HttpMethod.DELETE, "/medicos").hasRole("ADMIN")
-                                    .requestMatchers(HttpMethod.DELETE, "/pacientes").hasRole("ADMIN")
+                                    .requestMatchers(HttpMethod.POST, "/usuarios").permitAll()
+                                    .requestMatchers(HttpMethod.DELETE, "/medicos/**").hasRole("ADMIN")
+                                    .requestMatchers(HttpMethod.DELETE, "/pacientes/**").hasRole("ADMIN")
                                     .anyRequest().authenticated();
 
                 })
