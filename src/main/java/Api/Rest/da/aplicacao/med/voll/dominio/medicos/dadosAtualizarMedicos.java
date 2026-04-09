@@ -7,7 +7,8 @@ public record dadosAtualizarMedicos (
         @NotNull Long id,
         String nome,
         String telefone,
-        dadosEnderecos endereco){
+        dadosEnderecos endereco)
+        {
 
 
-}
+        }

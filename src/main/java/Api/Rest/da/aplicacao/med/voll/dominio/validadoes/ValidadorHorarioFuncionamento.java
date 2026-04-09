@@ -2,12 +2,14 @@ package Api.Rest.da.aplicacao.med.voll.dominio.validadoes;
 
 import Api.Rest.da.aplicacao.med.voll.dominio.ValidacaoException;
 import Api.Rest.da.aplicacao.med.voll.dominio.dadosConsulta.DadosAgendamentoConsulta;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.time.DayOfWeek;
+@Component
+public class ValidadorHorarioFuncionamento  implements ValidadorAgendamentoDeConsultas  {
 
-public class ValidadorHorarioFuncionamento {
-
-
+    
     public void validar (DadosAgendamentoConsulta dados){
         var dataConsulta = dados.data();
 

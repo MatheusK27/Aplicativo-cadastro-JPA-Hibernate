@@ -31,7 +31,7 @@ public class Medico {
     private boolean ativo;
 
     public Medico(dadosCadastroMedicos dados) {
-        this.ativo= true;
+        this.ativo = true;
         this.nome = dados.nome();
         this.email = dados.email();
         this.crm = dados.crm();
@@ -53,10 +53,14 @@ public class Medico {
         if (dados.endereco() != null) {
             this.endereco.atualizarInfomacoes(dados.endereco());
         }
+        this.ativo = true;
     }
 
 
     public void excluir() {
-        this.ativo= false;
+        this.ativo = false;
+
     }
 }
+
+

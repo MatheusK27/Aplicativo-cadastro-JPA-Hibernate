@@ -1,13 +1,17 @@
 package Api.Rest.da.aplicacao.med.voll.dominio.dadosConsulta;
 
 
+import Api.Rest.da.aplicacao.med.voll.cancelamento.ValidarCancelamentoConsulta;
 import Api.Rest.da.aplicacao.med.voll.dominio.ValidacaoException;
 import Api.Rest.da.aplicacao.med.voll.dominio.medicos.Medico;
 import Api.Rest.da.aplicacao.med.voll.dominio.medicos.MedicoRepository;
 
 import Api.Rest.da.aplicacao.med.voll.dominio.pacientes.PacienteRepository;
+import Api.Rest.da.aplicacao.med.voll.dominio.validadoes.ValidadorAgendamentoDeConsultas;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class AgendaDeConsultas {
@@ -23,7 +27,13 @@ public class AgendaDeConsultas {
     @Autowired
     private PacienteRepository pacienteRepository;
 
-    public void  agendar(DadosAgendamentoConsulta dados){
+    @Autowired
+    private List<ValidarCancelamentoConsulta> validadorCancel;
+
+    @Autowired
+    private List<ValidadorAgendamentoDeConsultas>  validador;
+
+    public DadosDetalhamentoConsulta agendar(DadosAgendamentoConsulta dados){
 
         if(!pacienteRepository.existsById(dados.idPaciente())){
             throw new ValidacaoException("ID do paciente inválido ");
@@ -32,10 +42,19 @@ public class AgendaDeConsultas {
             throw new ValidacaoException("ID do médico inválido ");
         }
 
+        validador.forEach(v-> v.validar(dados));
+
         var medico= escolherMedico(dados);
         var paciente= pacienteRepository.getReferenceById(dados.idPaciente());
+
+        if(medico == null){
+            throw new ValidacaoException("Não existe médido disponóivel nessa data");
+        }
+
         var consulta =  new Consulta(null, medico, paciente, dados.data(),null);
         repository.save(consulta);
+
+        return new DadosDetalhamentoConsulta(consulta);
 
     }
 

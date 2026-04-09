@@ -49,6 +49,7 @@ public class Paciente {
         if (dados.email()!=null){
             this.email = dados.email();
         }
+        this.ativo=true;
 
     }
     public void excluir(){

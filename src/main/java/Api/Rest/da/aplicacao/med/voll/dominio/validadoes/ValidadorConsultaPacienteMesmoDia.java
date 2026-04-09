@@ -4,11 +4,15 @@ package Api.Rest.da.aplicacao.med.voll.dominio.validadoes;
 import Api.Rest.da.aplicacao.med.voll.dominio.ValidacaoException;
 import Api.Rest.da.aplicacao.med.voll.dominio.dadosConsulta.ConsultaRepository;
 import Api.Rest.da.aplicacao.med.voll.dominio.dadosConsulta.DadosAgendamentoConsulta;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 
 import java.time.LocalDateTime;
+@Component
+public class ValidadorConsultaPacienteMesmoDia implements ValidadorAgendamentoDeConsultas {
 
-public class ValidadorConsultaPacienteMesmoDia {
-
+    @Autowired
     private ConsultaRepository repository;
 
     public void validar(DadosAgendamentoConsulta dados){
