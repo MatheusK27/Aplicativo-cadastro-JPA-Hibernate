@@ -28,15 +28,11 @@ private AgendaDeConsultas agenda;
 
     @DeleteMapping
     @Transactional
-    public ResponseEntity cancelar (DadosCancelamentoConsultas dados){
+    public ResponseEntity cancelar (@RequestBody @Valid DadosCancelamentoConsultas dados){
 
       agenda.cancelar(dados);
-      return ResponseEntity.notFound().build();
+        return ResponseEntity.noContent().build();
 
     }
-
-
-
-
 
 }

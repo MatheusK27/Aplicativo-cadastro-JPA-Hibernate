@@ -1,16 +1,18 @@
-package Api.Rest.da.aplicacao.med.voll.cancelamento;
+package Api.Rest.da.aplicacao.med.voll.dominio.validadoes.cancelamento;
 
 import Api.Rest.da.aplicacao.med.voll.dominio.ValidacaoException;
 import Api.Rest.da.aplicacao.med.voll.dominio.dadosConsulta.ConsultaRepository;
 import Api.Rest.da.aplicacao.med.voll.dominio.dadosConsulta.DadosCancelamentoConsultas;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
 
 @Component("ValidadorHorarioAntecedenciaCancelamento")
-public class ValidadorCancelamentoConsulta implements ValidarCancelamentoConsulta {
+public class ValidadorHorarioAntecedencia implements ValidarCancelamentoConsulta {
 
+    @Autowired
     private ConsultaRepository repository;
 
     public void validar(DadosCancelamentoConsultas dados ){
