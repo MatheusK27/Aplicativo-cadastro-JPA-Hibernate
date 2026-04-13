@@ -5,6 +5,7 @@ import Api.Rest.da.aplicacao.med.voll.infra.security.Roles;
 import Api.Rest.da.aplicacao.med.voll.usuario.DadosCadastroUsuario;
 import Api.Rest.da.aplicacao.med.voll.usuario.Usuario;
 import Api.Rest.da.aplicacao.med.voll.usuario.UsuarioRepository;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 
@@ -36,6 +37,7 @@ public class UsuarioController {
 
     @DeleteMapping("/{id}")
     @Transactional
+    @SecurityRequirement(name = "bearer-key")
     public ResponseEntity deletarUsuario(@PathVariable Long id)  {
         repository.deleteById(id);
           return ResponseEntity.ok().build();
@@ -43,6 +45,7 @@ public class UsuarioController {
     }
 
     @PutMapping("/admin/promover")
+    @SecurityRequirement(name = "bearer-key")
     public ResponseEntity promover(@RequestBody String login) {
 
         Usuario usuario = repository.findByLogin(login);

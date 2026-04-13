@@ -26,6 +26,7 @@ public class SicurityConfig {
     private SecurityFilter securityFilter;
 
 
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return
@@ -36,6 +37,7 @@ public class SicurityConfig {
                                     .requestMatchers(HttpMethod.POST, "/usuarios").permitAll()
                                     .requestMatchers(HttpMethod.DELETE, "/medicos/**").hasRole("ADMIN")
                                     .requestMatchers(HttpMethod.DELETE, "/pacientes/**").hasRole("ADMIN")
+                                    .requestMatchers("/v3/api-docs/**", "/swagger-ui.html","/swagger-ui/**").permitAll()
                                     .anyRequest().authenticated();
 
                 })
