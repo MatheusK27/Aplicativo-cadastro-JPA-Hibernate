@@ -4,7 +4,6 @@ package Api.Rest.da.aplicacao.med.voll.controller;
 import Api.Rest.da.aplicacao.med.voll.dominio.dadosConsulta.DadosCancelamentoConsultas;
 import Api.Rest.da.aplicacao.med.voll.dominio.dadosConsulta.AgendaDeConsultas;
 import Api.Rest.da.aplicacao.med.voll.dominio.dadosConsulta.DadosAgendamentoConsulta;
-import Api.Rest.da.aplicacao.med.voll.dominio.dadosConsulta.DadosDetalhamentoConsulta;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +20,7 @@ public class ConsultaController {
 private AgendaDeConsultas agenda;
 
     @PostMapping
+    @Transactional
     public ResponseEntity agendar(@RequestBody @Valid DadosAgendamentoConsulta dados){
 
         var dto=agenda.agendar(dados);
