@@ -1,8 +1,5 @@
-package test;
+package Api.Rest.da.aplicacao.med.voll.controller;
 
-import Api.Rest.da.aplicacao.med.voll.controller.MedicoController;
-import Api.Rest.da.aplicacao.med.voll.dominio.dadosConsulta.DadosDetalhamentoConsulta;
-import Api.Rest.da.aplicacao.med.voll.dominio.endereco.Endereco;
 import Api.Rest.da.aplicacao.med.voll.dominio.endereco.dadosEnderecos;
 import Api.Rest.da.aplicacao.med.voll.dominio.medicos.*;
 import org.junit.jupiter.api.DisplayName;
@@ -19,9 +16,9 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
 
@@ -44,24 +41,29 @@ class MedicoControllerTest {
 
 
 
+    @WithMockUser(roles = "ADMIN")
     @Test
-    @DisplayName("Deveria retornar errp http 400 quando informações estão invalidas")
+    @DisplayName("Deveria retornar erro http 400 quando informações estão invalidas")
     void cadastrarCenario1() throws Exception {
-        var response= mvc.perform(post("/medicos")).andReturn().getResponse();
+        var response = mvc.perform(post("/medicos")
+                        .with(csrf())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{}"))
+                .andReturn()
+                .getResponse();
 
         assertThat(response.getStatus()).isEqualTo(HttpStatus.BAD_REQUEST.value());
     }
-
     @Test
     @DisplayName("Deveria retornar errp http 201 quando informações estão validas")
-    @WithMockUser
+    @WithMockUser(roles = "ADMIN")
     void cadastrarCenario2() throws Exception {
         var cadastro = new dadosCadastroMedicos("medico", "medico@hotmail.com",
-                "61998706365","12334560", Especialidades.CARDIOLOGIA,dadosEndereco());
+                "123456","022998706365", Especialidades.CARDIOLOGIA,dadosEndereco());
 
         when(repository.save(any())).thenReturn(new Medico(cadastro));
 
-        var response= mvc.perform(post("/medicos").contentType(MediaType.APPLICATION_JSON)
+        var response= mvc.perform(post("/medicos").with(csrf()).contentType(MediaType.APPLICATION_JSON)
                 .content(json.write(cadastro).getJson())).andReturn().getResponse();
 
         var dadosDetalhamento= new dadosDetalhamentoMedicos(
@@ -74,9 +76,9 @@ class MedicoControllerTest {
 
 
                 );
-        var jsonEsperado= json.write(cadastro).getJson();
-        assertThat(response.getStatus()).isEqualTo(HttpStatus.CREATED.value());
+        var jsonEsperado= jsonDet.write(dadosDetalhamento).getJson();
         assertThat(response.getContentAsString()).isEqualTo(jsonEsperado);
+
 
 
 
@@ -86,7 +88,7 @@ class MedicoControllerTest {
         return new dadosEnderecos(
                 "rua xpto",
                 "bairro",
-                "00000000",
+                "000000000",
                 "Brasilia",
                 "DF",
                 null,

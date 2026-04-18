@@ -37,7 +37,7 @@ class MedicoRepositoryTest {
         var proximaSegunda = LocalDate.now()
                 .with(TemporalAdjusters.next(DayOfWeek.MONDAY))
                 .atTime(10,0);
-        var medicoLivre=  repository.escolherMedicoAleatoriLivreNaData(Especialidades.CARDIOLOGIA, LocalDate.from(proximaSegunda));
+        var medicoLivre=  repository.escolherMedicoAleatoriLivreNaData(Especialidades.CARDIOLOGIA,proximaSegunda);
         assertThat(medicoLivre).isNull();
 
     }
